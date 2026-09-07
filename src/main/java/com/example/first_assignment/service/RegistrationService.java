@@ -10,9 +10,12 @@ import com.example.first_assignment.exception.EmployeeAlreadyExistsException;
 import com.example.first_assignment.repository.AppUserRepository;
 import com.example.first_assignment.repository.EmployeeRepository;
 import com.example.first_assignment.security.RegisterRequest;
+import com.example.first_assignment.exception.*;
+import com.example.first_assignment.service.*;
 
 @Service
-public class RegistrationService {
+public class RegistrationService 
+{
 
     private final EmployeeRepository employeeRepository;
     private final AppUserRepository appUserRepository;
@@ -39,7 +42,12 @@ public class RegistrationService {
         if (appUserRepository.findByUsername(request.getUsername()).isPresent()) {
             throw new IllegalArgumentException(
                     "Username already exists");
-        }
+        }   
+        if (appUserRepository.findByUsername(request.getUsername()).isPresent()) {
+                throw new UserAlreadyExistsException(request.getUsername());
+            }
+        
+        
 
         Employee employee = new Employee();
 

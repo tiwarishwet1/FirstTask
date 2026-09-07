@@ -5,6 +5,14 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
+//{
+//    "employeeId": 111,
+//    "employeeName": "Rohan Verma",
+//    "employeeSalary": 60000,
+//    "isActive": "Y",
+//    "username": "rohan",
+//    "password": "rohan123"
+//}
 public class RegisterRequest {
 
     @NotNull(message = "Employee ID is required")

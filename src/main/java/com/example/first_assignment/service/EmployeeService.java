@@ -214,4 +214,12 @@ public class EmployeeService {
                 employee.getUpdatedBy()
         );
     }
+    
+    public List<Employee> getEmployeesWithSalaryGreaterThan(
+            double salary) {
+
+        return employeeRepository
+                .findByEmployeeSalaryGreaterThan(salary);
+    }
+    
 }

@@ -43,7 +43,17 @@ public class EmployeeController {
         return employeeService.getEmployeesForUser(
                 authentication.getName());
     }
+    @GetMapping("/salary/greater-than/{salary}")
+    public ResponseEntity<List<Employee>> getEmployeesWithSalaryGreaterThan(
+            @PathVariable double salary) {
 
+        List<Employee> employees =
+                employeeService
+                    .getEmployeesWithSalaryGreaterThan(salary);
+
+        return ResponseEntity.ok(employees);
+    
+    }    
     // =========================================================
     // GET EMPLOYEE BY ID
     // =========================================================
@@ -58,6 +68,7 @@ public class EmployeeController {
                 authentication.getName(),
                 employeeId);
     }
+    
 
     // =========================================================
     // POST
