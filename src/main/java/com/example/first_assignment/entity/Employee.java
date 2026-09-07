@@ -1,16 +1,27 @@
 package com.example.first_assignment.entity;
 
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
-import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "Employee_details")
 public class Employee {
 
@@ -39,15 +50,23 @@ public class Employee {
     @Column(name = "is_active")
     private String isActive;
 
-    @Column(name = "created_on")
+    @CreatedDate
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @Column(name = "created_on", updatable = false)
     private LocalDateTime createdOn;
 
-    @Column(name = "created_by")
+    @CreatedBy
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @Column(name = "created_by", updatable = false)
     private String createdBy;
 
+    @LastModifiedDate
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Column(name = "updated_on")
     private LocalDateTime updatedOn;
 
+    @LastModifiedBy
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Column(name = "updated_by")
     private String updatedBy;
 
